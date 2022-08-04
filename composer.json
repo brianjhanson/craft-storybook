@@ -1,0 +1,38 @@
+{
+  "name": "brianjhanson/craft-storybook",
+  "type": "craft-plugin",
+  "require": {
+    "craftcms/cms": "^3.7"
+  },
+  "require-dev": {
+    "craftcms/cms": "^3.7",
+    "vlucas/phpdotenv": "^3.0"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "brianjhanson\\storybook\\": "src/"
+    }
+  },
+    "extra": {
+        "name": "Storybook",
+        "handle": "storybook",
+        "developer": "Brian Hanson",
+        "developerUrl": "https://brianhanson.net/",
+        "documentationUrl": "",
+        "changelogUrl": "",
+        "class": "brianjhanson\\storybook\\Storybook"
+    },
+  "authors": [
+    {
+      "name": "brianhanson",
+      "email": "brian@brianhanson.net"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

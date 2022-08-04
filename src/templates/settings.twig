@@ -1,0 +1,12 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: 'Stories Directory',
+    instructions: 'Where your stories are stored on the server.',
+    id: 'storiesDirectory',
+    name: 'storiesDirectory',
+    value: settings['storiesDirectory'],
+    errors: settings.getError('storiesDirectory')
+}) }}
