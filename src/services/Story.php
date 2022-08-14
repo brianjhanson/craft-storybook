@@ -2,7 +2,7 @@
 
 namespace brianjhanson\storybook\services;
 
-use brianjhanson\Storybook\Storybook;
+use brianjhanson\storybook\Storybook;
 use craft\helpers\FileHelper;
 use craft\helpers\Json;
 
@@ -20,5 +20,4 @@ class Story extends \craft\base\Component
         FileHelper::writeToFile($filepath, Json::encode($config));
         echo $filepath;
     }
-
 }
