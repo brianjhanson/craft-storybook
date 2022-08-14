@@ -2,10 +2,10 @@
   "name": "brianjhanson/craft-storybook",
   "type": "craft-plugin",
   "require": {
-    "craftcms/cms": "^3.7"
+    "craftcms/cms": "^4.0"
   },
   "require-dev": {
-    "craftcms/cms": "^3.7",
+    "craftcms/cms": "^4.0",
     "vlucas/phpdotenv": "^3.0"
   },
   "license": "MIT",
