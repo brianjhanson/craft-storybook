@@ -35,11 +35,9 @@ class Storybook extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        if (Craft::$app->request->getIsSiteRequest()) {
-            // Add in our Twig extension
-            $extension = new StorybookTwigExtension();
-            Craft::$app->view->registerTwigExtension($extension);
-        }
+        // Add in our Twig extension
+        $extension = new StorybookTwigExtension();
+        Craft::$app->view->registerTwigExtension($extension);
 
         Event::on(
             UrlManager::class,

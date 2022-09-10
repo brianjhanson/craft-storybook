@@ -25,7 +25,9 @@ class StorybookTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('story', [Story::class, 'writeStoryFile'])
+            new TwigFunction('story', [Story::class, 'story'], [
+                'needs_context' => true
+            ])
         ];
     }
 }

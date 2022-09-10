@@ -4,8 +4,10 @@
 namespace brianjhanson\storybook\console\controllers;
 
 
-use brianjhanson\storybook\services\Story;
+use Craft;
 use craft\console\Controller;
+use craft\helpers\App;
+use craft\web\View;
 use yii\console\ExitCode;
 
 /**
@@ -19,9 +21,11 @@ class StoriesController extends Controller
      *
      * @return int
      */
-    public function actionGenerate($componentName): int
+    public function actionGenerate($componentName = '*'): int
     {
-        Story::generate($componentName);
+        $templateName = \craft\helpers\StringHelper::replace($componentName, App::parseEnv('@templates') . '/', '');
+        echo $templateName;
+        Craft::$app->getView()->renderTemplate($templateName, [], View::TEMPLATE_MODE_SITE);
         return ExitCode::OK;
     }
 
