@@ -17,15 +17,18 @@ class StoriesService extends Component
     {
         $elementService = Craft::$app->getElements();
         $core = StringHelper::trim($str, '{%}');
-        $parts = explode(':', $core);
+        $parts = array_pad(explode(':', $core), 2, null);
 
         $refHandle = $parts[0];
         $ref = $parts[1];
         $elementType = $elementService->getElementTypeByRefHandle($refHandle);
 
         $elementQuery = $elementService->createElementQuery($elementType)
-            ->status(null)
-            ->id($ref);
+            ->status(null);
+
+        if ($ref) {
+            $elementQuery->id($ref);
+        }
 
         return $elementQuery->one();
     }
