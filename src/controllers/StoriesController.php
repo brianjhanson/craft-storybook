@@ -3,13 +3,18 @@
  * craft-storybook-example module for Craft CMS 3.x
  *
  * @link      https://onedesigncompany.com
- * @copyright Copyright (c) 2022 One Design Company
+ * @copyright Copyright (c) 2022 Brian Hanson
  */
 
 namespace brianjhanson\storybook\controllers;
 
+use brianjhanson\storybook\Storybook;
 use Craft;
+use craft\base\Element;
+use craft\base\ElementInterface;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\Json;
+use craft\helpers\StringHelper;
 use craft\web\Controller;
 use Exception;
 use yii\web\Response;
@@ -55,10 +60,16 @@ class StoriesController extends Controller
 
     /**
      * @param string $value
-     * @return bool|string
+     * @return bool|string|ElementInterface|null
      */
-    private function normalizeValue(string $value): bool|string
+    private function normalizeValue(string $value): mixed
     {
+        if (StringHelper::startsWith($value, '{%')) {
+            return Storybook::getInstance()->stories->parseStoryRefs($value);
+        }
+
+        $value = Craft::$app->getElements()->parseRefs($value);
+
         if ($value === 'true') {
             return true;
         }
@@ -81,14 +92,6 @@ class StoriesController extends Controller
         $normalized = [];
 
         foreach ($params as $key => $value) {
-            if (is_string($value)) {
-                $value = Craft::$app->getElements()->parseRefs($value);
-
-                if (Json::isJsonObject($value)) {
-                    $value = Json::decode($value);
-                }
-            }
-
             if (is_array($value)) {
                 $normalized[$key] = $this->normalizeParams($value);
             } else {

@@ -2,13 +2,14 @@
 
 namespace brianjhanson\storybook;
 
+use brianjhanson\storybook\services\StoriesService;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use yii\base\Event;
 
 /**
- *
+ * @property StoriesService $stories
  */
 class Storybook extends Plugin
 {
@@ -38,5 +39,9 @@ class Storybook extends Plugin
                 $event->rules['storybook/preview/<component:.+>'] = 'storybook/stories/preview';
             }
         );
+
+        $this->setComponents([
+            'stories' => StoriesService::class
+        ]);
     }
 }
